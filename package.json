@@ -1,0 +1,37 @@
+{
+	"name": "sveltekit-graphql-fetch",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build",
+		"preview": "vite preview",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"lint": "prettier --plugin-search-dir . --check . && eslint .",
+		"format": "prettier --plugin-search-dir . --write .",
+		"codegen": "export $(grep SWOP_API_KEY .env | xargs) && graphql-codegen --config codegen.json && prettier --write src/lib/generated/graphql.ts"
+	},
+	"devDependencies": {
+		"@fontsource/source-sans-pro": "^4.5.11",
+		"@graphql-codegen/cli": "^2.16.5",
+		"@graphql-codegen/typescript-operations": "^2.5.13",
+		"@sveltejs/adapter-auto": "^1.0.0-next.90",
+		"@sveltejs/kit": "^1.0.0-next.587",
+		"@typescript-eslint/eslint-plugin": "^5.45.0",
+		"@typescript-eslint/parser": "^5.45.0",
+		"eslint": "^8.28.0",
+		"eslint-config-prettier": "^8.5.0",
+		"eslint-plugin-svelte3": "^4.0.0",
+		"graphql": "^16.6.0",
+		"graphql-codegen-svelte-apollo": "^1.1.0",
+		"prettier": "^2.8.0",
+		"prettier-plugin-svelte": "^2.8.1",
+		"svelte": "^3.54.0",
+		"svelte-check": "^2.9.2",
+		"tslib": "^2.4.1",
+		"typescript": "^4.9.3",
+		"vite": "^4.0.0"
+	},
+	"type": "module"
+}
