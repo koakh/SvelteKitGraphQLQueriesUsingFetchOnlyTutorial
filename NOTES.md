@@ -40,8 +40,6 @@ const query = `#graphql
 
 ## SvelteKit GraphQL Type Generation - Part II
 
-
-
 ```shell
 $ pnpm install -D graphql graphql-codegen-svelte-apollo @graphql-codegen/cli @graphql-codegen/typescript-operations
 ```
