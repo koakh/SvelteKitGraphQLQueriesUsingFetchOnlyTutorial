@@ -1,0 +1,19 @@
+schema:
+  - https://swop.cx/graphql
+overwrite: true
+documents:
+  - './src/**/*.gql'
+generates:
+  # src/lib/server/graphql/generated.ts:
+  # src/lib/generated.ts:
+  src/generated.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - graphql-codegen-svelte-apollo
+      # - ../src/index.js # in codegen-svelte-apollo lib development
+      # - svelte-apollo # in real usage of the lib
+    config:
+    #   clientPath: 'src/apollo-client'
+      clientPath: './apollo-client'
+      asyncQuery: true
