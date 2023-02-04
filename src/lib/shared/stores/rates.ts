@@ -1,5 +1,6 @@
-import { writable } from 'svelte/store';
+import type { Rate } from '$lib/generated/graphql';
+import { writable, type Writable } from 'svelte/store';
 
-const rates = writable([]);
+const rates: Writable<Rate[]> = writable([]);
 
 export { rates as default };

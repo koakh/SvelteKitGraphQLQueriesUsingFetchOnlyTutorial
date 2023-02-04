@@ -1,5 +1,7 @@
 import { SWOP_API_KEY } from '$env/static/private';
+// used Query and QueryLatestArgs type(s) from codegen
 import type { Query, QueryLatestArgs } from '$lib/generated/graphql';
+import { apiUrl } from '$lib/shared/constants';
 import { error } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 
@@ -20,19 +22,21 @@ const query = `#graphql
 		}
 	}`;
 
+// define form actions
 export const actions: Actions = {
   add: async ({ request }) => {
     try {
       const form = await request.formData();
       const currency = form.get('currency');
 
-      if (typeof currency === 'string') {        
+      if (typeof currency === 'string') {      
+        // used QueryLatestArgs type(s) from codegen
         const variables: QueryLatestArgs = {
           baseCurrency: 'EUR',
           quoteCurrencies: [currency]
         };
 
-        const response = await fetch('https://swop.cx/graphql', {
+        const response = await fetch(apiUrl, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -46,6 +50,7 @@ export const actions: Actions = {
           })
         });
 
+        // used Query type(s) from codegen
         const responseData: { data: Query } = await response.json();
         const rate = responseData.data.latest[0];
         return { rate };
@@ -59,6 +64,7 @@ export const actions: Actions = {
   }
 };
 
+// define page load
 export const load: PageServerLoad = async () => {
   try {
     const variables: QueryLatestArgs = {
@@ -66,7 +72,7 @@ export const load: PageServerLoad = async () => {
       quoteCurrencies: ['CAD', 'GBP', 'IDR', 'INR', 'USD']
     };
 
-    const response = await fetch('https://swop.cx/graphql', {
+    const response = await fetch(apiUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -80,6 +86,7 @@ export const load: PageServerLoad = async () => {
       })
     });
 
+    // used Query type(s) from codegen
     const { data: responseData }: { data: Query } = await response.json();
     return { ...responseData };
   } catch (error) {

@@ -1,17 +1,18 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+  // used Query type(s) from codegen
 	import type { Query } from '$lib/generated/graphql';
 	import rates from '$lib/shared/stores/rates';
 	import '@fontsource/source-sans-pro/latin.css';
 	import type { ActionData } from './$types';
 
+  // used Query type(s) from codegen, this data is typed
 	export let data: Query;
 	export let form: ActionData;
 
 	// write to store
-	// We will actually render whatever is in the store rather than the result of the query directly.
-	// The benefit of doing it that way is that we can easily update what is rendered
-	// by adding another other currency pair to the store
+	// We will actually render whatever is in the store, rather than the result of the query directly.
+	// The benefit of doing it that way, is that we can easily update what is rendered by adding another other currency pair to the store
 	// (without any complex logic for merging what is already rendered with new query results).
 	data.latest && rates.set(data.latest);
 
@@ -53,10 +54,11 @@
 			<label for="additional-currency">Additional Currency</label>
 		</span>
 		<input
+      style="width: 180px"
 			required
 			id="additional-currency"
 			name="currency"
-			placeholder="AUD"
+			placeholder="XAF,CRC..."
 			title="Add another currency"
 			type="text"
 		/>
